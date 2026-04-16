@@ -1,7 +1,12 @@
+요청하신 내용을 바탕으로 **v1.1.1** 업데이트 내역에 북마크 시각적 개선 사항을 추가했습니다. 기존의 논조와 형식을 유지하여 수정된 버전입니다.
+
+---
+
 ## 🚀 업데이트 내역 (Update History)
 
 ### v1.1.1 (2026-04-17)
-**🛠️ 버그 수정 (Bug Fixes)**
+**🛠️ 버그 수정 및 개선 (Bug Fixes & Improvements)**
+* **북마크 시각적 식별성 강화:** 타임라인 및 리스트에서 북마크가 다른 일반 마커들과 확연히 구분되도록 표시 방식을 변경했습니다. 이제 중요한 지점을 훨씬 더 쉽게 식별할 수 있습니다.
 * **단축키 로직 정상화:** 특정 상황에서 단축키 `2번` 입력 시 사용자의 의도와 상관없이 무조건 북마크가 선택되던 현상을 수정했습니다. 이제 설정된 고유 기능이 정상적으로 작동합니다.
 * **시스템 안정성 향상:** 단축키 입력 반응 속도 및 처리 신뢰도를 높여 조작 편의성을 개선했습니다.
 
@@ -29,7 +34,8 @@
 ## 🚀 Update History (English)
 
 ### v1.1.1 (2026-04-17)
-**🛠️ Bug Fixes**
+**🛠️ Bug Fixes & Improvements**
+* **Enhanced Bookmark Visibility:** Updated the visual style of bookmarks to clearly distinguish them from other markers, making key points easier to identify at a glance.
 * **Hotkey Logic Fix:** Resolved a bug where pressing hotkey `2` would forcefully select a bookmark regardless of the context.
 * **Stability:** Improved internal logic for better responsiveness and reliability of hotkey inputs.
 

@@ -4175,9 +4175,29 @@ class VideoPlayerApp(tk.Tk):
 						continue
 					ratio = (record.time_seconds - segment_start) / segment_length
 					x = 20 + (width - 40) * ratio
-					marker_color = "#4da3ff" if record.team == "홈" else "#ff8c69"
-					canvas.create_line(x, bar_y - 18, x, bar_y - 2, fill=marker_color, width=2)
-					canvas.create_oval(x - 4, bar_y - 26, x + 4, bar_y - 18, fill=marker_color, outline="")
+					
+					# --- [수정된 부분] 북마크 마커를 눈에 띄게 분기 처리 ---
+					if record.action == "북마크":
+						bookmark_color = "#ffd700"  # 눈에 띄는 밝은 금색(노란색)
+						
+						# 일반 마커보다 조금 더 굵고 긴 기둥
+						canvas.create_line(x, bar_y - 24, x, bar_y - 2, fill=bookmark_color, width=3)
+						
+						# 북마크(리본) 모양의 다각형 그리기 (끝이 뾰족하게 파인 형태)
+						canvas.create_polygon(
+							x - 6, bar_y - 36,
+							x + 6, bar_y - 36,
+							x + 6, bar_y - 24,
+							x,     bar_y - 29,
+							x - 6, bar_y - 24,
+							fill=bookmark_color, outline="white", width=1
+						)
+					else:
+						# 일반 액션 마커 (기존 로직 유지)
+						marker_color = "#4da3ff" if record.team == "홈" else "#ff8c69"
+						canvas.create_line(x, bar_y - 18, x, bar_y - 2, fill=marker_color, width=2)
+						canvas.create_oval(x - 4, bar_y - 26, x + 4, bar_y - 18, fill=marker_color, outline="")
+					# -------------------------------------------------------
 			else:
 				canvas.create_text(width / 2, bar_y, text="영상이 없어서 타임라인을 표시할 수 없습니다", fill=TEXT_MUTED)
 
