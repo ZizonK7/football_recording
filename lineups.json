@@ -1,0 +1,32 @@
+{
+  "home_team": "Arsenal",
+  "away_team": "AFC Bournemouth",
+  "home_starting": [
+    "1. David Raya",
+    "4. Ben White",
+    "2. William Saliba",
+    "6. Gabriel",
+    "49. Myles Lewis-Skelly",
+    "36. Martín Zubimendi",
+    "41. Declan Rice",
+    "20. Noni Madueke",
+    "29. Kai Havertz",
+    "11. Gabriel Martinelli",
+    "14. Viktor Gyökeres"
+  ],
+  "home_bench": [],
+  "away_starting": [
+    "1. Djordje Petrovic",
+    "20. Álex Jiménez",
+    "23. James Hill",
+    "5. Marcos Senesi",
+    "3. Adrien Truffert",
+    "8. Alex Scott",
+    "10. Ryan Christie",
+    "37. Rayan",
+    "22. Junior Kroupi",
+    "16. Marcus Tavernier",
+    "9. Evanilson"
+  ],
+  "away_bench": []
+}

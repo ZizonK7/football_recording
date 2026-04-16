@@ -1,0 +1,5 @@
+.venv/
+
+build/
+*.pkg
+#pyinstaller --noconfirm --windowed --onefile --icon="assets\thumbnail.ico" --name "Hudl" --add-data="assets;assets" --hidden-import="ffpyplayer.player" --distpath="C:\Users\피콜록콜록\OneDrive\바탕 화면\새 폴더\Program" program.py

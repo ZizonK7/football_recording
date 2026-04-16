@@ -1,0 +1,38 @@
+[STARTING]
+1. Noah Atubolu
+29. Philipp Treu
+28. Matthias Ginter
+3. Philipp Lienhart
+33. Jordy Makengo
+8. Maximilian Eggestein
+44. Johan Manzambi
+19. Jan-Niklas Beste
+14. Yuito Suzuki
+32. Vincenzo Grifo
+31. Igor Matanovic
+
+[BENCH]
+21Florian MüllerKeeper
+21MüllerKeeper
+24Jannik HuthKeeper
+24HuthKeeper
+5Anthony JungDefender
+5JungDefender
+43Bruno OgbusDefender
+43OgbusDefender
+30Christian GünterDefender
+30GünterDefender
+65Karl SteinmannDefender
+65SteinmannDefender
+17Lukas KüblerDefender
+17KüblerDefender
+27Nicolas HöflerMidfielder
+27HöflerMidfielder
+22Cyriaque IriéAttacker
+22IriéAttacker
+7Derry ScherhantAttacker
+7ScherhantAttacker
+9Lucas HölerAttacker
+9HölerAttacker
+26Maximilian PhilippAttacker
+26PhilippAttacker
