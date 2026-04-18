@@ -1,37 +1,23 @@
 [STARTING]
-13. Ionut Radu
-32. Javi Rodríguez
-29. Yoel Lago
-20. Marcos Alonso
-17. Javi Rueda
-15. Matías Vecino
-6. Ilaix Moriba
-3. Óscar Mingueza
-30. Fer López
-7. Borja Iglesias
-9. Ferrán Jutglà
+13. Paulo Gazzaniga
+25. Eric Garcia
+5. David Lopez
+17. Daley Blind
+3. Miguel Gutiérrez
+21. Yangel Herrera
+14. Aleix Garcia
+8. Viktor Tsigankov
+23. Iván Martin
+24. Cristian Portu
+9. Artem Dovbyk
 
 [BENCH]
-1. ivan villar
-14Álvaro NúñezDefender
-14NúñezDefender
-4Joseph AidooDefender
-4AidooDefender
-12Manu FernándezDefender
-12FernándezDefender
-21Mihailo RisticDefender
-21RisticDefender
-22Hugo SoteloMidfielder
-22SoteloMidfielder
-39Jones El-AbdellaouiMidfielder
-39El-AbdellaouiMidfielder
-5Sergio CarreiraMidfielder
-5CarreiraMidfielder
-23Hugo ÁlvarezAttacker
-23ÁlvarezAttacker
-10Iago AspasAttacker
-10AspasAttacker
-18Pablo DuránAttacker
-18DuránAttacker
-19Williot SwedbergAttacker
-19SwedbergAttacker
+20. yan couto
+6.818Pablo TorreMidfielder
+50’6.818TorreMidfielder
+7.816SavinhoAttacker
+51’7.816SavinhoAttacker
+8.07Cristhian StuaniAttacker
+56’8.07StuaniAttacker
+6.04Arnau MartinezDefender
+65’6.04MartinezDefender

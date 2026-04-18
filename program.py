@@ -360,19 +360,30 @@ def parse_fotmob_match_id(match_url: str) -> str:
 	if not parsed.netloc or "fotmob.com" not in parsed.netloc.lower():
 		raise ValueError("FotMob URL이 아닙니다.")
 
+	# 1. fragment가 숫자(matchId)인 경우
 	fragment = parsed.fragment.strip()
 	if fragment.isdigit():
 		return fragment
 
+	# 2. 쿼리스트링 matchId
 	query_match_id = parse_qs(parsed.query).get("matchId", [""])[0].strip()
 	if query_match_id.isdigit():
 		return query_match_id
 
+	# 3. path의 마지막 segment가 6~8자리 영숫자(예전/신형 혼합)
+	path_segments = [seg for seg in parsed.path.split("/") if seg]
+	if path_segments:
+		last_segment = path_segments[-1]
+		# 6~8자리 영숫자 (fotmob 예전/신형 혼합)
+		if re.fullmatch(r"[a-z0-9]{6,8}", last_segment, re.IGNORECASE):
+			return last_segment
+
+	# 4. fallback: matchId= 또는 # 뒤에 숫자
 	fallback = re.search(r"(?:matchId=|#)(\d+)", match_url)
 	if fallback:
 		return fallback.group(1)
 
-	raise ValueError("URL에서 matchId를 찾을 수 없습니다. 예: ...#4837419")
+	raise ValueError("URL에서 matchId를 찾을 수 없습니다. 예: ...#4837419 또는 .../4sjn7kv5")
 
 
 def fetch_json(url: str, timeout: float = 20.0) -> dict:
@@ -3856,54 +3867,55 @@ class VideoPlayerApp(tk.Tk):
 		self.status_var.set(f"기록 저장 완료: {Path(target_path).name}")
 
 	def _build_project_data(self) -> dict:
-		return {
-			"video_path": str(self.video_path.absolute()) if self.video_path is not None else "",
-			"timeline_start_offset_seconds": self.timeline_start_offset_seconds,
-			"timeline_adjust_mode": self.timeline_adjust_mode,
-			"period_markers": {
-				"first_half_start_seconds": self.first_half_start_seconds,
-				"first_half_end_seconds": self.first_half_end_seconds,
-				"second_half_start_seconds": self.second_half_start_seconds,
-				"second_half_end_seconds": self.second_half_end_seconds,
-			},
-			"team_names": {
-				"home": self.home_team_name,
-				"away": self.away_team_name,
-			},
-			"player_id_maps": {
-				"home": dict(PLAYER_ID_MAP_HOME),
-				"away": dict(PLAYER_ID_MAP_AWAY),
-			},
-			"lineups": {
-				"home": {
-					"starting": list(self.initial_player_options_home),
-					"bench": list(self.initial_bench_options_home),
-				},
-				"away": {
-					"starting": list(self.initial_player_options_away),
-					"bench": list(self.initial_bench_options_away),
-				},
-			},
-			"records": [
-				{
-					"time_seconds": record.time_seconds,
-					"period_label": record.period_label,
-					"team": record.team,
-					"jersey_number": record.jersey_number,
-					"player_id": record.player_id,
-					"player_name": record.player_name,
-					"action": record.action,
-					"result": record.result,
-					"sub_out_jersey_number": record.sub_out_jersey_number,
-					"sub_out_player_id": record.sub_out_player_id,
-					"sub_out_player_name": record.sub_out_player_name,
-					"sub_in_jersey_number": record.sub_in_jersey_number,
-					"sub_in_player_id": record.sub_in_player_id,
-					"sub_in_player_name": record.sub_in_player_name,
-				}
-				for record in self.timeline_records
-			],
-		}
+		   return {
+			   "video_path": str(self.video_path.absolute()) if self.video_path is not None else "",
+			   "timeline_start_offset_seconds": self.timeline_start_offset_seconds,
+			   "timeline_adjust_mode": self.timeline_adjust_mode,
+			   "current_time_seconds": self.current_time_seconds,  # 현재 타임라인 위치 저장
+			   "period_markers": {
+				   "first_half_start_seconds": self.first_half_start_seconds,
+				   "first_half_end_seconds": self.first_half_end_seconds,
+				   "second_half_start_seconds": self.second_half_start_seconds,
+				   "second_half_end_seconds": self.second_half_end_seconds,
+			   },
+			   "team_names": {
+				   "home": self.home_team_name,
+				   "away": self.away_team_name,
+			   },
+			   "player_id_maps": {
+				   "home": dict(PLAYER_ID_MAP_HOME),
+				   "away": dict(PLAYER_ID_MAP_AWAY),
+			   },
+			   "lineups": {
+				   "home": {
+					   "starting": list(self.initial_player_options_home),
+					   "bench": list(self.initial_bench_options_home),
+				   },
+				   "away": {
+					   "starting": list(self.initial_player_options_away),
+					   "bench": list(self.initial_bench_options_away),
+				   },
+			   },
+			   "records": [
+				   {
+					   "time_seconds": record.time_seconds,
+					   "period_label": record.period_label,
+					   "team": record.team,
+					   "jersey_number": record.jersey_number,
+					   "player_id": record.player_id,
+					   "player_name": record.player_name,
+					   "action": record.action,
+					   "result": record.result,
+					   "sub_out_jersey_number": record.sub_out_jersey_number,
+					   "sub_out_player_id": record.sub_out_player_id,
+					   "sub_out_player_name": record.sub_out_player_name,
+					   "sub_in_jersey_number": record.sub_in_jersey_number,
+					   "sub_in_player_id": record.sub_in_player_id,
+					   "sub_in_player_name": record.sub_in_player_name,
+				   }
+				   for record in self.timeline_records
+			   ],
+		   }
 
 	def _has_unsaved_project_changes(self) -> bool:
 		if self.video_path is None:
@@ -3990,6 +4002,19 @@ class VideoPlayerApp(tk.Tk):
 		self.load_video(found_video_path)
 		self.timeline_start_offset_seconds = float(project_data.get("timeline_start_offset_seconds", 0.0) or 0.0)
 		self.timeline_adjust_mode = bool(project_data.get("timeline_adjust_mode", False))
+		# 타임라인 위치 복원
+		loaded_time = project_data.get("current_time_seconds")
+		if loaded_time is not None:
+			try:
+				self.current_time_seconds = float(loaded_time)
+				# 영상 위치도 이동
+				if self.video_capture is not None:
+					self.video_capture.set(cv2.CAP_PROP_POS_MSEC, self.current_time_seconds * 1000)
+				# UI도 갱신
+				if hasattr(self, "seek_scale"):
+					self.seek_scale.set(self.current_time_seconds)
+			except Exception:
+				pass
 		period_markers = project_data.get("period_markers", {})
 		if isinstance(period_markers, dict):
 			self.first_half_start_seconds = float(period_markers.get("first_half_start_seconds")) if period_markers.get("first_half_start_seconds") is not None else None
